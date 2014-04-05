@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<title>Random Mundane Magic Item Generator</title>
+
+<meta name="viewport" content="user-scalable=yes, width=device-width">
+  <style type="text/css">body{font-family:Verdana, sans-serif;line-height:1.5em;font-size:1.2em;color:#111;background:#fff;width:auto;max-width:33em;margin:auto;padding:1em}
+a{color:#38f;text-decoration:none}
+h1,h2,h3{font-weight:400;font-family:Helvetica, Ariel, sans-serif;color:#222}
+h1{font-size:1.5em;line-height:1.2em;margin-top:.5em;margin-bottom:.5em}
+h2,h3{font-size:1.2em;line-height:1.2em;margin:0;padding:0}</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+adjective = [
+"Grimy",
+"Soft",
+"Warm",
+"Rough",
+"Smooth",
+"Old",
+"Ancient",
+"Crumbling",
+"Pristine",
+"Cool",
+"Ornate",
+"Plain",
+"Chilling",
+"Runed",
+"Carved",
+"Decorated",
+"Delicate",
+"Burned",
+"Shining",
+"Smokey"];
+
+origin = [
+"draconic",
+"dwarven",
+"elven",
+"pre-humanoid",
+"divine",
+"unholy",
+"abyssal",
+"otherworldly",
+"royal",
+"orcish",
+"undead",
+"goblinoid",
+"dark elven",
+"astral",
+"ethereal",
+"hellish",
+"elemental",
+"gnomish",
+"shadow",
+"arcane"];
+
+item = [
+"rod",
+"gemstone",
+"opal",
+"stone",
+"coin",
+"crown",
+"amulet",
+"ring",
+"dagger",
+"brooch",
+"glove",
+"mirror",
+"hammer",
+"pipe",
+"tooth",
+"flute",
+"mask",
+"bell",
+"lamp",
+"bone"];
+
+power = [
+"offers brief glimpses of the future",
+"provides true seeing",
+"engulfs the user in protective flames",
+"allows passage through solid objects",
+"provides limited telekenesis",
+"emits ghost sounds",
+"lets the user communicate telepathically",
+"draws someone closer",
+"pushes someone away",
+"turns user into unbreakable stone",
+"turns the user's skin into flexible steel",
+"lets the user levitate",
+"engulfs a weapon in flame",
+"creates an antimagic shell",
+"speeds up the user",
+"increases luck",
+"lets the user talk to plants",
+"gives historical visions of the current location",
+"lets the user see through the eyes of another",
+"creates and controls an illusional doppelganger",
+"creates acidic fog",
+"lets the user walk on air",
+"creates a magical alarm",
+"lets the user alter their appearance",
+"creates wild growth",
+"enlarges the user",
+"shrinks the user",
+"opens a dimensional door",
+"makes the user invisible",
+"soothes someone",
+"enrages someone",
+"creates an arcane lock",
+"projects the user into the astral plane",
+"summons tentacles",
+"creates food and drink",
+"summons lightning",
+"creates fear",
+"charms",
+"summons a magical fist",
+"commands plants",
+"answers a question",
+"creates a cone of cold",
+"cures",
+"summons darkness",
+"anchors teleportation",
+"dispels magic",
+"summons swarms",
+"drains energy",
+"creates an explosive rune",
+"finds traps",
+"fires flaming arrows",
+"turns the user into gas",
+"protects from spells",
+"creates an illusion",
+"heats metal",
+"creates an icy storm",
+"solves puzzles",
+"summons a faithful servant",
+"opens locks",
+"locates an object",
+"locates a creature",
+"creates a shell of magical protection",
+"creates a safe place",
+"fires magical missiles",
+"breaks inanimate objects",
+"summons a spectral steed",
+"creates an obscuring mist",
+"summons nightmares",
+"polymorphs an object",
+"creates a wall of rock",
+"reads any language",
+"reverses gravity",
+"fires a scorching ray",
+"creates a blinding light",
+"lets the user walk in shadows",
+"silences an area",
+"slows a creature",
+"allows spider climbing",
+"summons a spiritual weapon",
+"imparts a suggestion",
+"stops time",
+"lets the user strike true",
+"creates a wall of fire",
+"creates an invisible wall",
+"allows water breathing",
+"allows water walking",
+"summons webs",
+"controls rope",
+"secures a door",
+"makes someone sleepy",
+"makes the user fall like a feather",
+"detects motives",
+"increases charisma",
+"increases strength",
+"increases dexterity",
+"increases intelligence",
+"increases wisdom",
+"increases constitution",
+"shines like the sun",
+"turns rock to mud"];
+
+quirk = [
+"forces the user to speak the truth",
+"is uncomfortably hot",
+"emits bright harmless flames",
+"whispers horrible truths",
+"turns the user's skin blue",
+"glows in white light",
+"creates the illusion of crawling spiders",
+"the user sees silent angry ghosts",
+"shouts",
+"imparts clumsiness",
+"imparts uncomfortable itching",
+"vexes the user",
+"drips blood",
+"shocks randomly",
+"imparts headaches",
+"smells horrible",
+"imparts nausea",
+"smokes",
+"drips with oil",
+"shines with multicolored light"];
+
+	function randomPhrase(wordList) {
+		console.log(wordList.length);
+		var length = wordList.length;
+		var random = Math.floor(Math.random() * length)
+		return wordList[random]
+	}
+
+	function phrase() { return randomPhrase(adjective).concat(" ",randomPhrase(origin)," ",randomPhrase(item)," that ",randomPhrase(power)," and ",randomPhrase(quirk))};
+
+	var tenRandomItems = "";
+
+	for (var i=1;i<101;i++)
+	{ 
+	tenRandomItems = tenRandomItems.concat("<p>",i,". ",phrase());
+	}
+
+	function numberedList(list) {
+		var listString = "<ol>";
+		for (i=0;i<list.length;i++) {
+			listString = listString.concat("<li>",list[i]);
+		}
+		listString = listString.concat("</ol>");
+
+		return listString;
+	}
+
+	$("div#adjectives").replaceWith(numberedList(adjective));
+	$("div#origins").replaceWith(numberedList(origin));
+	$("div#items").replaceWith(numberedList(item));
+	$("div#powers").replaceWith(numberedList(power));
+	$("div#quirks").replaceWith(numberedList(quirk));
+	
+	$("div#itemlist").replaceWith(tenRandomItems);
+	
+	
+});
+</script>
+
+<h1>Random Mundane Magic Item Generator</h1>
+
+<p>This page provides a set of lists used to generate single-use mundane magical items for your fantasy roleplaying game of choice. You can roll on each list to generate an item at the table or you can print out the 1d100 magic item list and roll against that. Reloading this page will build a new list of 100 random magic items.
+
+<p>It's intended that the powers on these items are of a short duration, roughly five minutes, or in some cases can only be used once. The descriptions of these items are purposefully vague to give the GM the ability to customize and define them to fit the game. If you need further guidance on how these powers work, take a look at the <a href="http://www.d20srd.org/indexes/spells.htm">d20 SRD spell descriptions</a> that inspired many of these powers. Better yet, let you and the player discuss and decide how these powers work at the game.
+
+<h2>Adjectives</h2>
+<div id="adjectives"></div>
+
+<h2>Origins</h2>
+<div id="origins"></div>
+
+<h2>Items</h2>
+<div id="items"></div>
+
+<h2>Powers</h2>
+<div id="powers"></div>
+
+<h2>Quirks</h2>
+<div id="quirks"></div>
+
+<h2>1d100 Random Mundane Magic Items</h2>
+<div id="itemlist"></div>
+
+<h2>License</h2>
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. You are free to share, copy, and adapt this work for any purpose, including commercial, as long as you give proper credit to <a href="http://slyflourish.com">Mike Shea at Sly Flourish</a>.
