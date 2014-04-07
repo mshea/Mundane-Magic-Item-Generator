@@ -25,7 +25,7 @@ h2,h3{font-size:1.2em;line-height:1.2em;margin:0;padding:0}</style>
 <script type="text/javascript">
 $(document).ready(function() {
 
-adjective = [
+var adjective = [
 "Grimy",
 "Chipped",
 "Warm",
@@ -69,7 +69,7 @@ origin = [
 "shadow",
 "arcane"];
 
-item = [
+var item = [
 "rod",
 "gemstone",
 "opal",
@@ -91,27 +91,27 @@ item = [
 "lamp",
 "bone"];
 
-power = [
+var power = [
 "offers brief glimpses of the future",
 "provides true seeing",
 "engulfs the user in protective flames",
 "allows passage through solid objects",
 "provides limited telekenesis",
-"emits ghost sounds",
+"lets the user emit ghost sounds",
 "lets the user communicate telepathically",
-"draws someone closer",
-"pushes someone away",
+"lets the user draws someone closer",
+"lets the user push someone away",
 "turns user into unbreakable stone",
 "turns the user's skin into flexible steel",
 "lets the user levitate",
 "engulfs a weapon in flame",
 "creates an antimagic shell",
 "speeds up the user",
-"increases luck",
+"increases the user's luck",
 "lets the user talk to plants",
-"gives historical visions of the current location",
+"provides historical visions of the current location",
 "lets the user see through the eyes of another",
-"creates and controls an illusional doppelganger",
+"lets the user create and control an illusional doppelganger",
 "creates acidic fog",
 "lets the user walk on air",
 "creates a magical alarm",
@@ -119,88 +119,88 @@ power = [
 "creates wild growth",
 "enlarges the user",
 "shrinks the user",
-"opens a dimensional door",
+"lets the user open a dimensional door",
 "makes the user invisible",
-"soothes someone",
-"enrages someone",
-"creates an arcane lock",
+"lets the user soothe someone",
+"lets the user enrages someone",
+"lets the user create an arcane lock",
 "projects the user into the astral plane",
-"summons tentacles",
+"lets the user summon tentacles",
 "creates food and drink",
-"summons lightning",
-"creates fear",
-"charms",
-"summons a magical fist",
-"commands plants",
-"answers a question",
-"creates a cone of cold",
-"cures",
-"summons darkness",
-"anchors teleportation",
-"dispels magic",
-"summons swarms",
-"drains energy",
-"creates an explosive rune",
-"finds traps",
-"fires flaming arrows",
+"lets the user call lightning",
+"lets the user create fear",
+"lets the user charm someone",
+"lets the user summon a large magical fist",
+"lets the user command plants",
+"answers a user's question",
+"lets the user emit a cone of cold",
+"lets the user cure diseases and curses",
+"lets the user create darkness",
+"lets the user anchor teleportation",
+"lets the user dispel magic",
+"lets the user summon swarms",
+"lets the user drain energy",
+"lets the user create an explosive rune",
+"lets the user finds traps",
+"lets the user fires flaming arrows",
 "gives the user gaseous form",
-"protects from spells",
-"creates an illusion",
-"heats metal",
-"creates an icy storm",
-"solves puzzles",
-"summons a faithful servant",
-"opens locks",
-"locates an object",
-"locates a creature",
-"creates a shell of magical protection",
-"creates a safe place",
-"fires magical missiles",
-"breaks inanimate objects",
-"summons a spectral steed",
-"creates an obscuring mist",
-"summons nightmares",
-"polymorphs an object",
-"creates a wall of rock",
-"reads any language",
-"reverses gravity",
-"fires a scorching ray",
-"creates a blinding light",
+"protects the user from spells",
+"lets the user create an illusion",
+"lets the user heat metal",
+"lets the user create an icy storm",
+"helps the user solves puzzles",
+"lets the user summon a faithful servant",
+"helps the user opens locks",
+"lets the user locate an object",
+"lets the user locate a creature",
+"lets the user create a shell of magical protection",
+"lets the user create a safe place",
+"lets the user fire magical missiles",
+"lets the user break inanimate objects",
+"lets the user summon a spectral steed",
+"lets the user create an obscuring mist",
+"lets the user summon nightmares",
+"lets the user polymorph an object",
+"lets the user create a wall of rock",
+"lets the user read any language",
+"lets the user reverse gravity",
+"lets the user fire a scorching ray",
+"lets the user create a blinding light",
 "lets the user walk in shadows",
-"silences an area",
-"slows a creature",
-"allows spider climbing",
-"summons a spiritual weapon",
-"imparts a suggestion",
-"stops time",
+"lets the user silence an area",
+"lets the user slow a creature",
+"gives the user spider climbing",
+"lets the user summon a spiritual weapon",
+"lets the user impart a suggestion",
+"lets the user stop time",
 "lets the user strike true",
-"creates a wall of fire",
-"creates an invisible wall",
-"allows water breathing",
-"allows water walking",
-"summons webs",
-"controls rope",
-"secures a door",
-"makes someone sleepy",
+"lets the user create a wall of fire",
+"lets the user create an invisible wall",
+"lets the user allows water breathing",
+"lets the user walk on water",
+"lets the user summon webs",
+"lets the user control a rope",
+"lets the user secure a door",
+"lets the user make someone sleepy",
 "makes the user fall like a feather",
-"detects motives",
-"increases charisma",
-"increases strength",
-"increases dexterity",
-"increases intelligence",
-"increases wisdom",
-"increases constitution",
+"lets the user detect motives",
+"increases the user's charisma",
+"increases the user's strength",
+"increases the user's dexterity",
+"increases the user's intelligence",
+"increases the user's wisdom",
+"increases the user's constitution",
 "shines like the sun",
-"turns rock to mud"];
+"lets the user turn rock to mud"];
 
-quirk = [
+var quirk = [
 "forces the user to speak the truth",
 "is uncomfortably hot",
 "emits bright harmless flames",
 "whispers horrible truths",
 "turns the user's skin blue",
-"glows in white light",
-"creates the illusion of crawling spiders",
+"glows in bright white light",
+"the user sees spiders crawling on all living things",
 "the user sees silent angry ghosts",
 "shouts",
 "makes the user clumsy",
@@ -295,22 +295,28 @@ quirk = [
 "the user gains temporary amnesia",
 "the user becomes afraid of hights"];
 
+	// Take in one of the five lists above, return a single random element.
 	function randomPhrase(wordList) {
-		console.log(wordList.length);
 		var length = wordList.length;
 		var random = Math.floor(Math.random() * length)
-		return wordList[random]
+		return wordList[random];
 	}
 
-	function phrase() { return randomPhrase(adjective).concat(" ",randomPhrase(origin)," ",randomPhrase(item)," that ",randomPhrase(power)," and ",randomPhrase(quirk))};
+	// Build a phrase from the random sets.
+	function phrase() {
+		// For quirks and powers, remove them when used so they don't repeat.
+		var randomQuirk = quirk.splice( $.inArray(randomPhrase(quirk), quirk), 1);
+		var randomPower = power.splice( $.inArray(randomPhrase(power), power), 1);
+		return randomPhrase(adjective).concat(" ",randomPhrase(origin)," ",randomPhrase(item)," that ",randomPower," and ",randomQuirk);
+		};
 
-	var tenRandomItems = "";
-
-	for (var i=1;i<101;i++)
-	{ 
-	tenRandomItems = tenRandomItems.concat("<p>",i,". ",phrase());
+	// Generate 100 random items in a big string
+	var randomItems = "";
+	for (var i=1;i<101;i++)	{
+		randomItems = randomItems.concat("<p>",i,". ",phrase());
 	}
 
+	// Generate HTML ordered lists based on the original lists.
 	function numberedList(list) {
 		var listString = "<ol>";
 		for (i=0;i<list.length;i++) {
@@ -321,15 +327,13 @@ quirk = [
 		return listString;
 	}
 
+	// Jquery selectors to display them on the page
+	$("div#itemlist").replaceWith(randomItems);
 	$("div#adjectives").replaceWith(numberedList(adjective));
 	$("div#origins").replaceWith(numberedList(origin));
 	$("div#items").replaceWith(numberedList(item));
 	$("div#powers").replaceWith(numberedList(power));
 	$("div#quirks").replaceWith(numberedList(quirk));
-	
-	$("div#itemlist").replaceWith(tenRandomItems);
-	
-	
 });
 </script>
 
@@ -354,6 +358,5 @@ quirk = [
 
 <h2>Quirks (roll 1d100)</h2>
 <div id="quirks"></div>
-
 
 <p>If you liked this script, take a look at <a href="http://slyflourish.com/lazydm/">the Lazy Dungeon Master</a>. You might also enjoy <a href="http://slyflourish.com/book/">Sly Flourish's Dungeon Master Tips</a> and <a href="http://slyflourish.com/epic/">Running Epic Tier D&amp;D Games</a>.
