@@ -1,0 +1,5 @@
+.idea
+.idea/*
+*.log
+*.DS_Store
+*.swp
