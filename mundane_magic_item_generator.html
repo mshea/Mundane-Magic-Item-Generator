@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<title>Random Mundane Magic Item Generator</title>
-<meta name="viewport" content="user-scalable=yes, width=device-width">
-<style type="text/css">body{font-family:Verdana, sans-serif;line-height:1.5em;font-size:1.2em;color:#111;background:#fff;width:auto;max-width:33em;margin:auto;padding:1em}
-a{color:#38f;text-decoration:none}
-h1,h2,h3{font-weight:400;font-family:Helvetica, Ariel, sans-serif;color:#222}
-h1{font-size:1.5em;line-height:1.2em;margin-top:.5em;margin-bottom:.5em}
-h2,h3{font-size:1.2em;line-height:1.2em;margin:0;padding:0}</style>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Random Mundane Magic Item Generator</title>
+    <meta name="viewport" content="user-scalable=yes, width=device-width">
+    <style type="text/css">
+        body{font-family:Verdana, sans-serif;line-height:1.5em;font-size:1.2em;color:#111;background:#fff;width:auto;max-width:33em;margin:auto;padding:1em}
+        a, #reload{color:#38f;text-decoration:none; cursor:pointer}
+        h1,h2,h3{font-weight:400;font-family:Helvetica, Ariel, sans-serif;color:#222}
+        h1{font-size:1.5em;line-height:1.2em;margin-top:.5em;margin-bottom:.5em}
+        h2,h3{font-size:1.2em;line-height:1.2em;margin:0;padding:0}
+        li{margin-bottom:.6em}
+    </style>
+</head>
+<body>
 
 <h1>Random Mundane Magic Item Generator</h1>
 
@@ -21,77 +28,19 @@ h2,h3{font-size:1.2em;line-height:1.2em;margin:0;padding:0}</style>
 
 <p>These lists and accompanying Javascript are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. You are free to share, copy, and adapt this work for any purpose, including commercial, as long as you give proper credit to <a href="http://slyflourish.com">Mike Shea at Sly Flourish</a>. You can find the <a href="https://github.com/mshea/Mundane-Magic-Item-Generator">latest version of this program at Github</a>.
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
 
-var adjective = [
-"Grimy",
-"Chipped",
-"Warm",
-"Rough",
-"Smooth",
-"Old",
-"Ancient",
-"Crumbling",
-"Pristine",
-"Cool",
-"Ornate",
-"Plain",
-"Chilling",
-"Runed",
-"Carved",
-"Decorated",
-"Delicate",
-"Burned",
-"Shining",
-"Smokey"];
+// Initial Object, more details set in datapack file
+var artificer = {adjective:[""], item:[""], origin:[""], quirk:[""], power:[""]};
 
-origin = [
-"draconic",
-"dwarven",
-"elven",
-"pre-humanoid",
-"divine",
-"unholy",
-"abyssal",
-"otherworldly",
-"royal",
-"orcish",
-"undead",
-"goblinoid",
-"dark elven",
-"astral",
-"ethereal",
-"hellish",
-"elemental",
-"gnomish",
-"shadow",
-"arcane"];
+artificer.adjective = "Grimy, Chipped, Warm, Rough, Smooth, Old, Ancient, Crumbling, Pristine, Cool, Ornate, Plain, Chilling, Runed, Carved, Decorated, Delicate, Burned, Shining, Smokey".split(", ");
 
-var item = [
-"rod",
-"gemstone",
-"opal",
-"stone",
-"coin",
-"crown",
-"amulet",
-"ring",
-"dagger",
-"brooch",
-"glove",
-"mirror",
-"hammer",
-"pipe",
-"tooth",
-"flute",
-"mask",
-"bell",
-"lamp",
-"bone"];
+artificer.origin = "draconic, dwarven, elven, pre-humanoid, divine, unholy, abyssal, otherworldly, royal, orcish, undead, goblinoid, dark elven, astral, ethereal, hellish, elemental, gnomish, shadow, arcane".split(", ");
 
-var power = [
+artificer.item = "rod, gemstone, opal, stone, coin, crown, amulet, ring, dagger, brooch, glove, mirror, hammer, pipe, tooth, flute, mask, bell, lamp, bone".split(", ");
+
+artificer.power = [
 "offers brief glimpses of the future",
 "provides true seeing",
 "engulfs the user in protective flames",
@@ -191,9 +140,10 @@ var power = [
 "increases the user's wisdom",
 "increases the user's constitution",
 "shines like the sun",
-"lets the user turn rock to mud"];
+"lets the user turn rock to mud"
+];
 
-var quirk = [
+artificer.quirk = [
 "forces the user to speak the truth",
 "is uncomfortably hot",
 "emits bright harmless flames",
@@ -202,7 +152,7 @@ var quirk = [
 "glows in bright white light",
 "the user sees spiders crawling on all living things",
 "the user sees silent angry ghosts",
-"shouts",
+"shouts angrily at children",
 "makes the user clumsy",
 "makes the user itchy",
 "vexes the user",
@@ -226,11 +176,11 @@ var quirk = [
 "the user's hair stands on end",
 "gives user hiccups",
 "garbles the user's speech",
-"sees everything in xray",
-"user experiences vertigo",
-"user's eyes go totally black",
-"user's eyes glow white",
-"user begins to weep",
+"the user sees everything in stark black and white",
+"the user experiences vertigo",
+"the user's eyes go totally black",
+"the user's eyes glow white",
+"the user begins to weep",
 "the user continually tastes blood",
 "the user grows a thick beard",
 "renders the user mute",
@@ -238,7 +188,7 @@ var quirk = [
 "insults those around in the user's voice",
 "causes the user to drool",
 "causes a ringing in the user's ear",
-"user's flesh becomes magnetic",
+"the user's flesh becomes magnetic",
 "smells like freshly baked bread",
 "makes the user dizzy",
 "the user grows excessive body hair",
@@ -246,7 +196,7 @@ var quirk = [
 "unbalances the user",
 "is slimy to the touch",
 "attracts mindless monsters",
-"user becomes depressed",
+"the user becomes depressed",
 "sets one of the user's possessions ablaze",
 "fills the user with euphoria",
 "gives the user an uncontrollable muscular tick",
@@ -255,7 +205,7 @@ var quirk = [
 "the user appears 50 years older",
 "the user's bladder always feels full",
 "the user becomes slightly drunk",
-"user gains acute hearing",
+"the user gains acute hearing",
 "shakes vigorously",
 "the user is dehydrated",
 "the user gets chills",
@@ -293,52 +243,73 @@ var quirk = [
 "grass grows on the user's skin",
 "the user grows claws",
 "the user gains temporary amnesia",
-"the user becomes afraid of hights"];
+"the user becomes afraid of heights"
+];
 
-	// Take in one of the five lists above, return a single random element.
-	function randomPhrase(wordList) {
-		var length = wordList.length;
-		var random = Math.floor(Math.random() * length)
-		return wordList[random];
-	}
+// Build a phrase from the random sets.
+artificer.build_power_phrase = function() {
 
-	// Build a phrase from the random sets.
-	function phrase() {
-		// For quirks and powers, remove them when used so they don't repeat.
-		var randomQuirk = quirk.splice( $.inArray(randomPhrase(quirk), quirk), 1);
-		var randomPower = power.splice( $.inArray(randomPhrase(power), power), 1);
-		return randomPhrase(adjective).concat(" ",randomPhrase(origin)," ",randomPhrase(item)," that ",randomPower," and ",randomQuirk);
-		};
+    // Take in one of the five lists above, return a single random element.
+    function randomPhrase(wordList) {
+        var length = wordList.length;
+        var random = Math.floor(Math.random() * length);
+        return wordList[random];
+    }
 
-	// Generate 100 random items in a big string
-	var randomItems = "";
-	for (var i=1;i<101;i++)	{
-		randomItems = randomItems.concat("<p>",i,". ",phrase());
-	}
+    // For quirks and powers, remove them when used so they don't repeat.
+    var randomQuirk = artificer.quirk.splice( $.inArray(randomPhrase(artificer.quirk), artificer.quirk), 1);
+    var randomPower = artificer.power.splice( $.inArray(randomPhrase(artificer.power), artificer.power), 1);
 
-	// Generate HTML ordered lists based on the original lists.
-	function numberedList(list) {
-		var listString = "<ol>";
-		for (i=0;i<list.length;i++) {
-			listString = listString.concat("<li>",list[i]);
-		}
-		listString = listString.concat("</ol>");
+    var phrase_adj = randomPhrase(artificer.adjective);
+    var phrase_origin = randomPhrase(artificer.origin);
+    var phrase_item = randomPhrase(artificer.item);
 
-		return listString;
-	}
+    return phrase_adj.concat(" ", phrase_origin, " ", phrase_item, " that ", randomPower, " and ", randomQuirk);
+};
 
-	// Jquery selectors to display them on the page
-	$("div#itemlist").replaceWith(randomItems);
-	$("div#adjectives").replaceWith(numberedList(adjective));
-	$("div#origins").replaceWith(numberedList(origin));
-	$("div#items").replaceWith(numberedList(item));
-	$("div#powers").replaceWith(numberedList(power));
-	$("div#quirks").replaceWith(numberedList(quirk));
+
+artificer.show_all_items = function() {
+    // Generate HTML ordered lists based on the original lists.
+    function numberedList(list) {
+        return "<ol><li>"+list.join("</li><li>")+"</li></ol>";
+    }
+
+    artificer.generate_item_list();
+
+    // Jquery selectors to display them on the page
+    $("div#itemlist").html(numberedList(artificer.randomItems));
+    $("div#adjectives").html(numberedList(artificer.adjective));
+    $("div#origins").html(numberedList(artificer.origin));
+    $("div#items").html(numberedList(artificer.item));
+    $("div#powers").html(numberedList(artificer.power));
+    $("div#quirks").html(numberedList(artificer.quirk));
+};
+artificer.generate_item_list = function() {
+    //Copy the original quirk list to be reused later
+    artificer.quirks = artificer.quirk.slice(0);
+    artificer.powers = artificer.power.slice(0);
+
+    // Generate 100 random items in a big string
+    var randomItemsList = [];
+    for (var i=1;i<=100;i++) {
+        randomItemsList.push(artificer.build_power_phrase());
+    }
+    artificer.randomItems = randomItemsList;
+
+    artificer.quirk = artificer.quirks.slice(0);
+    artificer.power = artificer.powers.slice(0);
+};
+
+$(document).ready(function() {
+    artificer.show_all_items();
+    $("#reload")
+        .bind("click",artificer.show_all_items);
 });
 </script>
 
 <a name="100items"></a>
-<h2>Random Mundane Magic Items (roll 1d100)</h2>
+<h2>Random Mundane Magic Items (roll 1d100) - <span id="reload">reroll</span></h2>
+
 <div id="itemlist"></div>
 
 <a name="lists"></a>
@@ -360,3 +331,6 @@ var quirk = [
 <div id="quirks"></div>
 
 <p>If you liked this script, take a look at <a href="http://slyflourish.com/lazydm/">the Lazy Dungeon Master</a>. You might also enjoy <a href="http://slyflourish.com/book/">Sly Flourish's Dungeon Master Tips</a> and <a href="http://slyflourish.com/epic/">Running Epic Tier D&amp;D Games</a>.
+
+</body>
+</html>
