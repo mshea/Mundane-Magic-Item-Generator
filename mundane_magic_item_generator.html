@@ -34,11 +34,71 @@
 // Initial Object, more details set in datapack file
 var artificer = {adjective:[""], item:[""], origin:[""], quirk:[""], power:[""]};
 
-artificer.adjective = "Grimy, Chipped, Warm, Rough, Smooth, Old, Ancient, Crumbling, Pristine, Cool, Ornate, Plain, Chilling, Runed, Carved, Decorated, Delicate, Burned, Shining, Smokey".split(", ");
+artificer.adjective = [
+"Grimy",
+"Chipped",
+"Warm",
+"Rough",
+"Smooth",
+"Old",
+"Ancient",
+"Crumbling",
+"Pristine",
+"Cool",
+"Ornate",
+"Plain",
+"Chilling",
+"Runed",
+"Carved",
+"Decorated",
+"Delicate",
+"Burned",
+"Shining",
+"Smokey"];
 
-artificer.origin = "draconic, dwarven, elven, pre-humanoid, divine, unholy, abyssal, otherworldly, royal, orcish, undead, goblinoid, dark elven, astral, ethereal, hellish, elemental, gnomish, shadow, arcane".split(", ");
+artificer.origin = [
+"draconic",
+"dwarven",
+"elven",
+"pre-humanoid",
+"divine",
+"unholy",
+"abyssal",
+"otherworldly",
+"royal",
+"orcish",
+"undead",
+"goblinoid",
+"dark elven",
+"astral",
+"ethereal",
+"hellish",
+"elemental",
+"gnomish",
+"shadow",
+"arcane"];
 
-artificer.item = "rod, gemstone, opal, stone, coin, crown, amulet, ring, dagger, brooch, glove, mirror, hammer, pipe, tooth, flute, mask, bell, lamp, bone".split(", ");
+artificer.item = [
+"rod",
+"gemstone",
+"opal",
+"stone",
+"coin",
+"crown",
+"amulet",
+"ring",
+"dagger",
+"brooch",
+"glove",
+"mirror",
+"hammer",
+"pipe",
+"tooth",
+"flute",
+"mask",
+"bell",
+"lamp",
+"bone"];
 
 artificer.power = [
 "offers brief glimpses of the future",
@@ -314,8 +374,9 @@ $(document).ready(function() {
 
 <a name="lists"></a>
 <h2>Individual Lists</h2>
-
+&nbsp;
 <h2>Adjectives (roll 1d20)</h2>
+
 <div id="adjectives"></div>
 
 <h2>Origins (roll 1d20)</h2>
