@@ -16,22 +16,11 @@
 
 <h1>Random Mundane Magic Item Generator</h1>
 
-<p>This page provides a randomly generated list of one hundred single-use mundane magical items for the fantasy roleplaying game of choice. You can view or print out the <a href="#100items">list of 100 magic item list</a> or use <a href="#lists">each list</a> on their own to generate your own random items. You can reload this page or click the "reroll" link to generate a new list. The sourcecode for this script is <a href="https://github.com/mshea/Mundane-Magic-Item-Generator">available at Github</a> and released under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons license</a>.
-
-<p>You can also <a href="http://s3.amazonaws.com/slyflourish_content/random_mundane_magic_items.pdf">download a random mundane magic item PDF</a> to keep in your <a href="http://slyflourish.com/dm_walk_away_kit.html">lazy GM kit</a>.
-
-<p>These items are intended to create single-use magical effects with a small, often humorous side-effect. Think of them like potions or scrolls. When activated the powers on these items work either only once or for about five minutes depending on the effect. The quirks also last about five minutes when the item is activated.
-
-<p>In order to ensure your group doesn't horde these items, you may want to make the quirks more severe if someone possesses more than three of them. There should be a clear incentive to use these items and not horde them.
-
-<p>The descriptions of these items are purposefully vague and include no mechanics. This lets GMs work with players to decide how they actually work and lets them work in just about any fantasy RPG of your choice. If you need further guidance on how these powers work, take a look at the <a href="http://www.d20srd.org/indexes/spells.htm">d20 SRD spell descriptions</a> that inspired many of these powers.
+<p>This page provides a randomly generated list of one hundred single-use mundane magical items for the fantasy roleplaying game of choice. You can reload this page or click the "reroll" link to generate a new list. The sourcecode for this script is <a href="https://github.com/mshea/Mundane-Magic-Item-Generator">available at Github</a> and released under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons license</a>.
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
-
-var artificer = {adjective:[""], item:[""], origin:[""], quirk:[""], power:[""]};
-
-artificer.adjective = [
+adjective = [
 "Grimy",
 "Chipped",
 "Warm",
@@ -53,7 +42,7 @@ artificer.adjective = [
 "Shining",
 "Smokey"];
 
-artificer.origin = [
+origin = [
 "draconic",
 "dwarven",
 "elven",
@@ -75,7 +64,7 @@ artificer.origin = [
 "shadow",
 "arcane"];
 
-artificer.item = [
+item = [
 "rod",
 "gemstone",
 "opal",
@@ -97,7 +86,7 @@ artificer.item = [
 "lamp",
 "bone"];
 
-artificer.power = [
+power = [
 "offers brief glimpses of the future",
 "provides true seeing",
 "engulfs the user in protective flames",
@@ -200,7 +189,7 @@ artificer.power = [
 "lets the user turn rock to mud"
 ];
 
-artificer.quirk = [
+quirk = [
 "forces the user to speak the truth",
 "is uncomfortably hot",
 "emits bright harmless flames",
@@ -303,65 +292,32 @@ artificer.quirk = [
 "the user becomes afraid of heights"
 ];
 
-// Build a phrase from the random sets.
-artificer.build_power_phrase = function() {
+var count = 100;
 
-    // Take in one of the five lists above, return a single random element.
-    function randomPhrase(wordList) {
-        var length = wordList.length;
-        var random = Math.floor(Math.random() * length);
-        return wordList[random];
-    }
-
-    // For quirks and powers, remove them when used so they don't repeat.
-    var randomQuirk = artificer.quirk.splice( $.inArray(randomPhrase(artificer.quirk), artificer.quirk), 1);
-    var randomPower = artificer.power.splice( $.inArray(randomPhrase(artificer.power), artificer.power), 1);
-
-    var phrase_adj = randomPhrase(artificer.adjective);
-    var phrase_origin = randomPhrase(artificer.origin);
-    var phrase_item = randomPhrase(artificer.item);
-
-    return phrase_adj.concat(" ", phrase_origin, " ", phrase_item, " that ", randomPower, " and ", randomQuirk);
+function shuffle(list){
+    for(var j, x, k = list.length; k; j = Math.floor(Math.random() * k), x = list[--k],list[k] = list[j], list[j] = x);
 };
 
-
-artificer.show_all_items = function() {
-    // Generate HTML ordered lists based on the original lists.
-    function numberedList(list) {
-        return "<ol><li>"+list.join("</li><li>")+"</li></ol>";
+function show() {
+    var output_string_list = [];
+    for (var i=0;i<count;i++) {
+        if(i % adjective.length == 0); shuffle(adjective);
+        if(i % origin.length == 0); shuffle(origin);
+        if(i % item.length == 0); shuffle(item);
+        if(i % power.length == 0) shuffle(power);
+        if(i % quirk.length == 0) shuffle(quirk);
+        output_string_list.push(adjective[i % adjective.length] + " " + origin[i % origin.length] + " " + item[i % item.length] + " that " + power[i % power.length] + " and " + quirk[i % quirk.length] + ".");
     }
-
-    artificer.generate_item_list();
-
-    // Jquery selectors to display them on the page
-    $("div#itemlist").html(numberedList(artificer.randomItems));
-    $("div#adjectives").html(numberedList(artificer.adjective));
-    $("div#origins").html(numberedList(artificer.origin));
-    $("div#items").html(numberedList(artificer.item));
-    $("div#powers").html(numberedList(artificer.power));
-    $("div#quirks").html(numberedList(artificer.quirk));
-};
-artificer.generate_item_list = function() {
-    //Copy the original quirk list to be reused later
-    artificer.quirks = artificer.quirk.slice(0);
-    artificer.powers = artificer.power.slice(0);
-
-    // Generate 100 random items in a big string
-    var randomItemsList = [];
-    for (var i=1;i<=100;i++) {
-        randomItemsList.push(artificer.build_power_phrase());
-    }
-    artificer.randomItems = randomItemsList;
-
-    artificer.quirk = artificer.quirks.slice(0);
-    artificer.power = artificer.powers.slice(0);
-};
+    $("div#itemlist").html("<ol><li>"+output_string_list.join("<li>"));
+}
 
 $(document).ready(function() {
-    artificer.show_all_items();
-    $("#reload")
-        .bind("click",artificer.show_all_items);
+    show();
+    $("#reload").bind("click",function(){
+        show();
+    });
 });
+
 </script>
 
 <a name="100items"></a>
@@ -369,23 +325,14 @@ $(document).ready(function() {
 
 <div id="itemlist"></div>
 
-<a name="lists"></a>
-<h2>Individual Lists</h2>
+<p>You can also <a href="http://s3.amazonaws.com/slyflourish_content/random_mundane_magic_items.pdf">download a random mundane magic item PDF</a> to keep in your <a href="http://slyflourish.com/dm_walk_away_kit.html">lazy GM kit</a>.
 
-<h3>Adjectives</h3>
+<h2>How To Use These Items</h2>
 
-<div id="adjectives"></div>
+<p>These items are intended to create single-use magical effects with a small, often humorous side-effect. Think of them like potions or scrolls. When activated the powers on these items work either only once or for about five minutes depending on the effect. The quirks also last about five minutes when the item is activated.
 
-<h3>Origins</h3>
-<div id="origins"></div>
+<p>In order to ensure your group doesn't horde these items, you may want to make the quirks more severe if someone possesses more than three of them. There should be a clear incentive to use these items and not horde them.
 
-<h3>Items</h3>
-<div id="items"></div>
-
-<h3>Powers</h3>
-<div id="powers"></div>
-
-<h3>Quirks</h3>
-<div id="quirks"></div>
+<p>The descriptions of these items are purposefully vague and include no mechanics. This lets GMs work with players to decide how they actually work and lets them work in just about any fantasy RPG of your choice. If you need further guidance on how these powers work, take a look at the <a href="http://www.d20srd.org/indexes/spells.htm">d20 SRD spell descriptions</a> that inspired many of these powers.
 
 <p>If you liked this script, take a look at <a href="http://slyflourish.com/lazydm/">the Lazy Dungeon Master</a>. You might also enjoy <a href="http://slyflourish.com/book/">Sly Flourish's Dungeon Master Tips</a> and <a href="http://slyflourish.com/epic/">Running Epic Tier D&amp;D Games</a>.
